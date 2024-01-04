@@ -1,0 +1,151 @@
+import java.util.List;
+1)
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Strupp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter strings (separated by space):");
+        String input = scanner.nextLine();
+
+        // Split the input string into an array of strings
+        String[] inputArray = input.split("\\s+");
+
+        // Create a Stream from the array
+        Stream<String> stringStream = Stream.of(inputArray);
+
+        List<String> uppercaseList = stringStream
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+
+        System.out.println("Uppercase strings: " + uppercaseList);
+    }
+}
+
+Output:
+Enter strings (separated by space):
+t y u i
+Uppercase strings: [T, Y, U, I]
+
+
+2)
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class NonEmptyStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter strings separated by spaces:");
+        String input = scanner.nextLine();
+
+        List<String> stringList = new ArrayList<>(List.of(input.split("\\s+")));
+
+        List<String> nonEmptyList = stringList
+                .stream()
+                .filter(str -> !str.isEmpty())
+                .toList();
+
+        System.out.println("List with non-empty strings: " + nonEmptyList);
+    }
+}
+
+
+Output:
+Enter strings separated by spaces:
+("abc", ef)
+List with non-empty strings: [("abc",, ef)]
+
+
+
+3)
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Gift{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<String> studentNames = new ArrayList<>();
+
+        System.out.println("Enter the names of 10 students:");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Student " + (i + 1) + ": ");
+            String name = scanner.nextLine();
+            studentNames.add(name);
+        }
+
+        List<String> specialStudents = studentNames
+                .stream()
+                .filter(name -> name.startsWith("A"))
+                .collect(Collectors.toList());
+
+        System.out.println("Students with names starting with 'A': " + specialStudents);
+
+        // Close the scanner to prevent resource leaks
+        scanner.close();
+    }
+}
+
+
+Output:
+Enter the names of 10 students:
+Student 1: Apple
+Student 2: Bob
+Student 3: Julie
+Student 4: Aron
+Student 5: Anus
+Student 6: Pothi
+Student 7: Pravee
+Student 8: Jehan
+Student 9: Jehaanoth
+Student 10: Veni
+Students with names starting with 'A': [Apple, Aron, Anus]
+
+
+
+4)
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Calc {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter their birthdate
+        System.out.print("Enter your birthdate (yyyy-mm-dd): ");
+        String inputDate = scanner.nextLine();
+
+        // Parse the input date using DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate birthdate = LocalDate.parse(inputDate, formatter);
+
+        // Calculate the age
+        LocalDate currentDate = LocalDate.now();
+        Period age = Period.between(birthdate, currentDate);
+
+        // Display the age
+        System.out.println("Your age is: " + age.getYears() + " years, " +
+                age.getMonths() + " months, and " + age.getDays() + " days.");
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+Output:
+Enter your birthdate (yyyy-mm-dd): 2001-06-17
+Your age is: 22 years, 6 months, and 18 days.
+
+Process finished with exit code 0
